@@ -6,8 +6,8 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ipinnovatech - Your Digital Second Brain',
-  description: 'Evolution of the Second Brain - Organize and enhance your digital knowledge',
+  title: 'Ipinnovatech - Red Multiservicios de IA',
+  description: 'IPINNOVATECH es una compañía de tecnología TI en el área de servicios ITO y BPO con más de 13 años en mercado.',
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-black text-white antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <LanguageProvider>
           {children}
         </LanguageProvider>

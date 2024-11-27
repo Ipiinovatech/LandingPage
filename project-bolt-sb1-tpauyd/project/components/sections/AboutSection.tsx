@@ -45,10 +45,10 @@ export function AboutSection() {
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
             {language === "es" ? "Sobre Nosotros" : "About Us"}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {language === "es"
-              ? "Somos pioneros en la evolución del Second Brain digital, combinando IA avanzada con gestión inteligente del conocimiento."
-              : "We are pioneers in the evolution of the digital Second Brain, combining advanced AI with intelligent knowledge management."}
+              ? "IPINNOVATECH es una compañía de tecnología TI en el área de servicios ITO y BPO con más de 13 años en mercado, con presencia en Colombia, Perú y Ecuador y próximamente en otros países de Sur América y Estados Unidos."
+              : "IPINNOVATECH is an IT technology company in the ITO and BPO services area with more than 13 years in the market, with presence in Colombia, Peru and Ecuador and soon in other countries in South America and the United States."}
           </p>
         </motion.div>
 
@@ -61,13 +61,13 @@ export function AboutSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-black/40 border-white/10 hover:border-white/20 transition-colors duration-300">
+              <Card className="bg-white/80 border-gray-200 hover:border-[var(--primary-blue)] transition-colors duration-300">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] p-2 flex items-center justify-center mb-4">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                  <p className="text-gray-400">{value.description}</p>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-800">{value.title}</h3>
+                  <p className="text-gray-600">{value.description}</p>
                 </CardContent>
               </Card>
             </motion.div>

@@ -6,17 +6,20 @@
   --primary-blue: #0066FF;
   --secondary-blue: #00A3FF;
   --accent-blue: #00D1FF;
+  --bg-light: #f8fafc;
+  --bg-gradient-start: #EEF2FF;
+  --bg-gradient-end: #E0E7FF;
 }
 
 @layer base {
   body {
-    @apply min-h-screen bg-gradient-to-b from-black via-gray-900 to-black;
+    @apply min-h-screen bg-gradient-to-b from-[var(--bg-gradient-start)] via-white to-[var(--bg-gradient-end)];
   }
 }
 
 @layer components {
   .nav-link {
-    @apply cursor-pointer px-4 py-2 text-gray-300 transition-colors duration-200 hover:text-white relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[var(--primary-blue)] after:to-[var(--accent-blue)] after:transition-all after:duration-300 hover:after:w-full;
+    @apply cursor-pointer px-4 py-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[var(--primary-blue)] after:to-[var(--accent-blue)] after:transition-all after:duration-300 hover:after:w-full;
   }
 
   .section-padding {

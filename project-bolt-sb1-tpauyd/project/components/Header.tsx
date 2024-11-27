@@ -1,6 +1,6 @@
 "use client";
 
-import { Brain } from "lucide-react";
+import Image from "next/image";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -20,7 +20,7 @@ export default function Header() {
 
   return (
     <motion.header 
-      className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -36,7 +36,15 @@ export default function Header() {
             duration={500}
             className="flex items-center space-x-2 cursor-pointer"
           >
-            <Brain className="h-8 w-8 text-[var(--primary-blue)]" />
+            <div className="relative w-8 h-8">
+              <Image
+                src="/logo.svg"
+                alt="IPINNOVATECH Logo"
+                width={32}
+                height={32}
+                priority
+              />
+            </div>
             <span className="text-xl font-bold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
               Ipinnovatech
             </span>
@@ -54,7 +62,7 @@ export default function Header() {
                     offset={-64}
                     duration={500}
                     className="nav-link"
-                    activeClass="after:w-full text-white"
+                    activeClass="after:w-full text-gray-900"
                   >
                     {item.name}
                   </Link>

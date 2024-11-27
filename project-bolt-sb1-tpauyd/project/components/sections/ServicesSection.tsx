@@ -66,7 +66,7 @@ export function ServicesSection() {
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
             {language === "es" ? "Nuestros Servicios" : "Our Services"}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {language === "es"
               ? "Ofrecemos soluciones tecnológicas integrales para impulsar tu transformación digital"
               : "We offer comprehensive technological solutions to drive your digital transformation"}
@@ -82,15 +82,15 @@ export function ServicesSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-black/40 border-white/10 hover:border-white/20 transition-colors duration-300">
+              <Card className="bg-white/80 border-gray-200 hover:border-[var(--primary-blue)] transition-colors duration-300">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] p-2 flex items-center justify-center mb-4">
                     {service.icon}
                   </div>
-                  <CardTitle>{service.title}</CardTitle>
+                  <CardTitle className="text-gray-800">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-gray-400">
+                  <CardDescription className="text-gray-600">
                     {service.description}
                   </CardDescription>
                 </CardContent>

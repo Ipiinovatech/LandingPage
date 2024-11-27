@@ -51,7 +51,7 @@ export function ClientsSection() {
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
             {language === "es" ? "Nuestros Clientes" : "Our Clients"}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {language === "es"
               ? "Lo que dicen nuestros clientes sobre nosotros"
               : "What our clients say about us"}
@@ -67,7 +67,7 @@ export function ClientsSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="bg-black/40 border-white/10 hover:border-white/20 transition-colors duration-300">
+              <Card className="bg-white/80 border-gray-200 hover:border-[var(--primary-blue)] transition-colors duration-300">
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4 mb-4">
                     <Avatar>
@@ -75,12 +75,12 @@ export function ClientsSection() {
                       <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-gray-400">{testimonial.role}</p>
+                      <p className="font-semibold text-gray-800">{testimonial.name}</p>
+                      <p className="text-sm text-gray-600">{testimonial.role}</p>
                       <p className="text-sm text-[var(--primary-blue)]">{testimonial.company}</p>
                     </div>
                   </div>
-                  <p className="text-gray-300 italic">&ldquo;{testimonial.text}&rdquo;</p>
+                  <p className="text-gray-700 italic">&ldquo;{testimonial.text}&rdquo;</p>
                 </CardContent>
               </Card>
             </motion.div>

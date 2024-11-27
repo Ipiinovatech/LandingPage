@@ -13,17 +13,17 @@ export function ContactSection() {
 
   const contactInfo = [
     {
-      icon: <Mail className="h-6 w-6" />,
+      icon: <Mail className="h-6 w-6 text-white" />,
       title: language === "es" ? "Email" : "Email",
       info: "contact@ipinnovatech.com"
     },
     {
-      icon: <Phone className="h-6 w-6" />,
+      icon: <Phone className="h-6 w-6 text-white" />,
       title: language === "es" ? "Teléfono" : "Phone",
       info: "+1 (555) 123-4567"
     },
     {
-      icon: <MapPin className="h-6 w-6" />,
+      icon: <MapPin className="h-6 w-6 text-white" />,
       title: language === "es" ? "Ubicación" : "Location",
       info: language === "es" ? "Silicon Valley, CA" : "Silicon Valley, CA"
     }
@@ -42,10 +42,10 @@ export function ContactSection() {
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
             {language === "es" ? "Contacto" : "Contact"}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {language === "es"
-              ? "¿Tienes alguna pregunta? Estamos aquí para ayudarte"
-              : "Have any questions? We're here to help"}
+              ? "Contáctanos para conocer más sobre nuestras soluciones de IA"
+              : "Contact us to learn more about our AI solutions"}
           </p>
         </motion.div>
 
@@ -57,12 +57,12 @@ export function ContactSection() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <Card className="bg-black/40 border-white/10">
+            <Card className="bg-white/80 border-gray-200">
               <CardHeader>
                 <CardTitle>
                   {language === "es" ? "Envíanos un mensaje" : "Send us a message"}
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-gray-600">
                   {language === "es"
                     ? "Completa el formulario y te responderemos pronto"
                     : "Fill out the form and we'll get back to you soon"}
@@ -73,23 +73,23 @@ export function ContactSection() {
                   <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder={language === "es" ? "Nombre" : "Name"}
-                      className="bg-black/20"
+                      className="bg-white/50"
                     />
                     <Input
                       placeholder={language === "es" ? "Correo" : "Email"}
                       type="email"
-                      className="bg-black/20"
+                      className="bg-white/50"
                     />
                   </div>
                   <Input
                     placeholder={language === "es" ? "Asunto" : "Subject"}
-                    className="bg-black/20"
+                    className="bg-white/50"
                   />
                   <Textarea
                     placeholder={language === "es" ? "Mensaje" : "Message"}
-                    className="bg-black/20 min-h-[150px]"
+                    className="bg-white/50 min-h-[150px]"
                   />
-                  <Button className="w-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] hover:opacity-90">
+                  <Button className="w-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] text-white hover:opacity-90">
                     {language === "es" ? "Enviar Mensaje" : "Send Message"}
                   </Button>
                 </form>
@@ -107,15 +107,15 @@ export function ContactSection() {
             {contactInfo.map((item, index) => (
               <Card
                 key={index}
-                className="bg-black/40 border-white/10 hover:border-white/20 transition-colors duration-300"
+                className="bg-white/80 border-gray-200 hover:border-[var(--primary-blue)] transition-colors duration-300"
               >
                 <CardContent className="flex items-center gap-4 p-6">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] p-2 flex items-center justify-center">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-semibold">{item.title}</h3>
-                    <p className="text-gray-400">{item.info}</p>
+                    <h3 className="font-semibold text-gray-800">{item.title}</h3>
+                    <p className="text-gray-600">{item.info}</p>
                   </div>
                 </CardContent>
               </Card>
