@@ -3,10 +3,8 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm";
 
 export function ContactSection() {
   const { language } = useLanguage();
@@ -42,10 +40,10 @@ export function ContactSection() {
           <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
             {language === "es" ? "Contacto" : "Contact"}
           </h2>
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             {language === "es"
-              ? "Contáctanos para conocer más sobre nuestras soluciones de IA"
-              : "Contact us to learn more about our AI solutions"}
+              ? "¿Tienes alguna pregunta? Estamos aquí para ayudarte"
+              : "Have any questions? We're here to help"}
           </p>
         </motion.div>
 
@@ -69,30 +67,7 @@ export function ContactSection() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder={language === "es" ? "Nombre" : "Name"}
-                      className="bg-white/50"
-                    />
-                    <Input
-                      placeholder={language === "es" ? "Correo" : "Email"}
-                      type="email"
-                      className="bg-white/50"
-                    />
-                  </div>
-                  <Input
-                    placeholder={language === "es" ? "Asunto" : "Subject"}
-                    className="bg-white/50"
-                  />
-                  <Textarea
-                    placeholder={language === "es" ? "Mensaje" : "Message"}
-                    className="bg-white/50 min-h-[150px]"
-                  />
-                  <Button className="w-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] text-white hover:opacity-90">
-                    {language === "es" ? "Enviar Mensaje" : "Send Message"}
-                  </Button>
-                </form>
+                <ContactForm />
               </CardContent>
             </Card>
           </motion.div>

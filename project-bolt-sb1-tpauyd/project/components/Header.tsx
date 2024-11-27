@@ -3,11 +3,14 @@
 import Image from "next/image";
 import { Link } from "react-scroll";
 import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useState } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Header() {
   const { t } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
     { name: t.nav.about, to: "about" },
@@ -45,12 +48,20 @@ export default function Header() {
                 priority
               />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
+            <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] bg-clip-text text-transparent">
               Ipinnovatech
             </span>
           </Link>
 
-          {/* Navigation */}
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
+          >
+            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+
+          {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <ul className="flex items-center space-x-1">
               {navItems.map((item) => (
@@ -71,11 +82,42 @@ export default function Header() {
             </ul>
           </nav>
 
-          {/* Right Section: Language Switcher */}
-          <div className="flex items-center">
+          {/* Language Switcher */}
+          <div className="hidden md:flex items-center">
             <LanguageSwitcher />
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 py-4"
+          >
+            <ul className="flex flex-col space-y-2 px-4">
+              {navItems.map((item) => (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    offset={-64}
+                    duration={500}
+                    className="block py-2 text-gray-600 hover:text-gray-900"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2 border-t border-gray-100">
+                <LanguageSwitcher />
+              </li>
+            </ul>
+          </motion.div>
+        )}
       </div>
     </motion.header>
   );

@@ -19,14 +19,21 @@
 
 @layer components {
   .nav-link {
-    @apply cursor-pointer px-4 py-2 text-gray-600 transition-colors duration-200 hover:text-gray-900 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[var(--primary-blue)] after:to-[var(--accent-blue)] after:transition-all after:duration-300 hover:after:w-full;
+    @apply cursor-pointer px-2 sm:px-4 py-2 text-sm sm:text-base text-gray-600 transition-colors duration-200 hover:text-gray-900 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[var(--primary-blue)] after:to-[var(--accent-blue)] after:transition-all after:duration-300 hover:after:w-full;
   }
 
   .section-padding {
-    @apply px-4 py-20 md:px-6 lg:px-8;
+    @apply px-4 py-12 sm:py-16 md:py-20 md:px-6 lg:px-8;
   }
 
   .section-container {
     @apply mx-auto max-w-7xl;
+  }
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 640px) {
+  .section-container {
+    @apply px-4;
   }
 }

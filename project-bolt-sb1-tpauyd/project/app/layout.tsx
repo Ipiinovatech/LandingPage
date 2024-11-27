@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { LanguageProvider } from '@/contexts/LanguageContext';
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+      </head>
       <body className={`${inter.className} antialiased`}>
         <LanguageProvider>
           {children}
+          <Toaster />
         </LanguageProvider>
       </body>
     </html>
