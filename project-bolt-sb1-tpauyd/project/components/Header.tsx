@@ -16,8 +16,7 @@ export default function Header() {
     { name: t.nav.about, to: "about" },
     { name: t.nav.services, to: "services" },
     { name: t.nav.products, to: "products" },
-    { name: t.nav.clients, to: "clients" },
-    { name: t.nav.blog, to: "blog" },
+    { name: t.nav.news, to: "news" },
     { name: t.nav.contact, to: "contact" },
   ];
 

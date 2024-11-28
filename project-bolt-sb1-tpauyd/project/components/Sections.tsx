@@ -1,8 +1,7 @@
 import { AboutSection } from "./sections/AboutSection";
 import { ServicesSection } from "./sections/ServicesSection";
 import { ProductsSection } from "./sections/ProductsSection";
-import { ClientsSection } from "./sections/ClientsSection";
-import { BlogSection } from "./sections/BlogSection";
+import { NewsSection } from "./sections/NewsSection";
 import { ContactSection } from "./sections/ContactSection";
 
 export function Sections() {
@@ -11,8 +10,7 @@ export function Sections() {
       <AboutSection />
       <ServicesSection />
       <ProductsSection />
-      <ClientsSection />
-      <BlogSection />
+      <NewsSection />
       <ContactSection />
     </>
   );
