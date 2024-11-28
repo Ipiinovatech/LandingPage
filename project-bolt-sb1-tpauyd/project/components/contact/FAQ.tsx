@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 export function FAQ() {
   const { language } = useLanguage();
@@ -40,7 +40,7 @@ export function FAQ() {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <section id="faq" className="section-padding bg-white">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

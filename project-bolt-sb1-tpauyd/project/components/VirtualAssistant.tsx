@@ -11,9 +11,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Bot, Check, ChevronsUpDown } from "lucide-react";
+import { Bot, Check, ChevronsUpDown, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { countries } from "@/lib/countries";
+import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name is too short"),
@@ -29,6 +30,8 @@ export function VirtualAssistant() {
   const [isMinimized, setIsMinimized] = useState(true);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -40,8 +43,28 @@ export function VirtualAssistant() {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const selectedCountry = countries.find(country => country.code === value);
+  const filteredCountries = countries.filter(country => 
+    country.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const onSubmit = async (data: FormData) => {
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: language === "es" 
+        ? "¡Mensaje Enviado con Éxito!" 
+        : "Message Sent Successfully!",
+      description: language === "es"
+        ? "¡Gracias por contactarnos! Hemos recibido tu mensaje correctamente. Nuestro equipo especializado lo revisará y te responderá dentro de las próximas 24-48 horas hábiles."
+        : "Thank you for reaching out! We have successfully received your message. Our specialized team will review it and respond within the next 24-48 business hours.",
+      className: "bg-white border-2 border-[var(--primary-blue)] shadow-lg",
+    });
+    
+    setIsSubmitting(false);
     reset();
     setValue("");
     setIsMinimized(true);
@@ -104,38 +127,68 @@ export function VirtualAssistant() {
                       variant="outline"
                       role="combobox"
                       aria-expanded={open}
-                      className="w-full justify-between bg-white text-gray-900 border-input"
+                      className={cn(
+                        "w-full justify-between bg-white border-gray-200",
+                        "hover:bg-gray-50 transition-colors duration-200",
+                        "focus:border-[var(--primary-blue)]",
+                        selectedCountry && "text-gray-900 font-medium"
+                      )}
                     >
-                      {value
-                        ? countries.find((country) => country.code === value)?.name
-                        : language === "es" ? "País" : "Country"}
-                      <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      <div className="flex items-center gap-2 truncate">
+                        <Globe className={cn(
+                          "h-4 w-4",
+                          selectedCountry ? "text-[var(--primary-blue)]" : "text-gray-500"
+                        )} />
+                        <span className={cn(
+                          "truncate",
+                          selectedCountry ? "font-medium text-[var(--primary-blue)]" : "text-gray-500"
+                        )}>
+                          {selectedCountry ? selectedCountry.name : language === "es" ? "Seleccionar país" : "Select country"}
+                        </span>
+                      </div>
+                      <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
+                  <PopoverContent className="w-full p-0 bg-white shadow-xl border border-gray-200">
                     <Command className="w-full">
-                      <CommandInput placeholder={language === "es" ? "Buscar país..." : "Search country..."} />
-                      <CommandEmpty>
+                      <CommandInput 
+                        placeholder={language === "es" ? "Buscar país..." : "Search country..."}
+                        value={searchQuery}
+                        onValueChange={setSearchQuery}
+                        className="border-none focus:ring-0"
+                      />
+                      <CommandEmpty className="py-2 px-4 text-sm text-gray-500">
                         {language === "es" ? "No se encontró el país" : "No country found"}
                       </CommandEmpty>
                       <CommandGroup className="max-h-[200px] overflow-y-auto">
-                        {countries.map((country) => (
+                        {filteredCountries.map((country) => (
                           <CommandItem
                             key={country.code}
                             value={country.code}
                             onSelect={(currentValue) => {
                               setValue(currentValue === value ? "" : currentValue);
                               setFormValue("country", currentValue);
+                              setSearchQuery("");
                               setOpen(false);
                             }}
+                            className={cn(
+                              "flex items-center gap-2 py-2 px-4 cursor-pointer",
+                              "hover:bg-gray-50 transition-colors duration-200",
+                              value === country.code && "bg-gray-50"
+                            )}
                           >
                             <Check
                               className={cn(
-                                "mr-2 h-4 w-4",
+                                "h-4 w-4 text-[var(--primary-blue)]",
                                 value === country.code ? "opacity-100" : "opacity-0"
                               )}
                             />
-                            {country.name}
+                            <span className={cn(
+                              "font-medium",
+                              value === country.code && "text-[var(--primary-blue)]"
+                            )}>
+                              {country.name}
+                            </span>
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -143,7 +196,7 @@ export function VirtualAssistant() {
                   </PopoverContent>
                 </Popover>
                 {errors.country && (
-                  <p className="text-sm text-red-500">{errors.country.message}</p>
+                  <p className="text-sm text-red-500 mt-1">{errors.country.message}</p>
                 )}
               </div>
 
@@ -161,8 +214,11 @@ export function VirtualAssistant() {
               <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-[var(--primary-blue)] to-[var(--accent-blue)] hover:opacity-90 text-white"
+                disabled={isSubmitting}
               >
-                {language === "es" ? "Enviar" : "Send"}
+                {isSubmitting 
+                  ? (language === "es" ? "Enviando..." : "Sending...") 
+                  : (language === "es" ? "Enviar" : "Send")}
               </Button>
             </form>
           </CardContent>
